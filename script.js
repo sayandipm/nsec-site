@@ -11,9 +11,7 @@ const adminCredentials = {
 // Google Apps Script Web App URL for saving form details to Google Sheets
 // TODO: Replace the placeholder below with your actual deployed Web App URL.
 // Example: const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx.../exec';
-// const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTAqPfBFWzCABmuUTCtZVf-2oRpaW17Buh4tTaV9mxhiuTkxe4A2uc_Fmw_evgK77OsA/exec';
-
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHLOJl6EQg8WbUrOaPd5j1yp2JQWonjqWf2Z9JBXaptR0Mm_w9VuF8tOQg8TtLNCO8/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTAqPfBFWzCABmuUTCtZVf-2oRpaW17Buh4tTaV9mxhiuTkxe4A2uc_Fmw_evgK77OsA/exec';
 
 // Check if user is already logged in as admin
 let isAdminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
