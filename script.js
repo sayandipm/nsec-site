@@ -11,7 +11,9 @@ const adminCredentials = {
 // Google Apps Script Web App URL for saving form details to Google Sheets
 // TODO: Replace the placeholder below with your actual deployed Web App URL.
 // Example: const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx.../exec';
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTAqPfBFWzCABmuUTCtZVf-2oRpaW17Buh4tTaV9mxhiuTkxe4A2uc_Fmw_evgK77OsA/exec';
+// const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzTAqPfBFWzCABmuUTCtZVf-2oRpaW17Buh4tTaV9mxhiuTkxe4A2uc_Fmw_evgK77OsA/exec';
+
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwHLOJl6EQg8WbUrOaPd5j1yp2JQWonjqWf2Z9JBXaptR0Mm_w9VuF8tOQg8TtLNCO8/exec';
 
 // Check if user is already logged in as admin
 let isAdminLoggedIn = sessionStorage.getItem('adminLoggedIn') === 'true';
@@ -21,11 +23,11 @@ let adminUsername = sessionStorage.getItem('adminUsername') || '';
 function animateText(elementId) {
   const element = document.getElementById(elementId);
   if (!element) return;
-  
+
   const text = element.textContent;
   const letters = text.split('');
   element.textContent = '';
-  
+
   letters.forEach((letter, index) => {
     const span = document.createElement('span');
     if (letter === ' ') {
@@ -40,37 +42,37 @@ function animateText(elementId) {
 }
 
 // Initialize admin state on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Animate the ZEST 2026 title and tagline on ZEST page
   animateText('animated-tagline-year');
   animateText('animated-tagline');
-  
+
   if (isAdminLoggedIn) {
     showAdminAccess(adminUsername);
   }
-  
+
   // Hamburger Menu
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('navMenu');
-  
+
   if (hamburger && navMenu) {
-    hamburger.addEventListener('click', function(e) {
+    hamburger.addEventListener('click', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      
+
       hamburger.classList.toggle('active');
       navMenu.classList.toggle('show');
     });
-    
+
     // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('show');
       }
     });
   }
-  
+
   // Logout button
   const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Partner section toggle for doubles in Student Portal
   initPartnerSectionToggle();
+  initTeamSectionToggle();
 });
 
 // Admin Login Function
@@ -87,18 +90,18 @@ function adminLogin(event) {
   const username = document.getElementById('adminUser').value;
   const password = document.getElementById('adminPass').value;
   const msgDiv = document.getElementById('adminLoginMsg');
-  
+
   // Check credentials
   if (adminCredentials[username] && adminCredentials[username] === password) {
     msgDiv.className = 'message success';
     msgDiv.innerHTML = ` Admin access granted! Welcome ${username}.<br>Loading dashboard...`;
-    
+
     // Store login state
     sessionStorage.setItem('adminLoggedIn', 'true');
     sessionStorage.setItem('adminUsername', username);
     isAdminLoggedIn = true;
     adminUsername = username;
-    
+
     setTimeout(() => {
       showAdminAccess(username);
       document.getElementById('adminLoginForm').reset();
@@ -108,7 +111,7 @@ function adminLogin(event) {
     msgDiv.className = 'message error';
     msgDiv.innerHTML = ' Invalid credentials. Access denied.<br>Only pre-registered admins can access this panel.';
   }
-  
+
   return false;
 }
 
@@ -118,15 +121,15 @@ function showAdminAccess(username) {
   const adminNavLink = document.getElementById('adminNavLink');
   const adminBadge = document.getElementById('adminBadge');
   const logoutBtn = document.getElementById('logoutBtn');
-  
+
   if (adminNavLink) adminNavLink.classList.add('visible');
   if (adminBadge) adminBadge.classList.add('visible');
   if (logoutBtn) logoutBtn.classList.add('visible');
-  
+
   // Show admin dashboard
   const adminLoginView = document.getElementById('adminLoginView');
   const adminDashboard = document.getElementById('adminDashboard');
-  
+
   if (adminLoginView) adminLoginView.style.display = 'none';
   if (adminDashboard) adminDashboard.classList.add('visible');
 }
@@ -137,23 +140,23 @@ function logout() {
   sessionStorage.removeItem('adminUsername');
   isAdminLoggedIn = false;
   adminUsername = '';
-  
+
   // Hide admin elements
   const adminNavLink = document.getElementById('adminNavLink');
   const adminBadge = document.getElementById('adminBadge');
   const logoutBtn = document.getElementById('logoutBtn');
-  
+
   if (adminNavLink) adminNavLink.classList.remove('visible');
   if (adminBadge) adminBadge.classList.remove('visible');
   if (logoutBtn) logoutBtn.classList.remove('visible');
-  
+
   // Hide admin dashboard, show login
   const adminLoginView = document.getElementById('adminLoginView');
   const adminDashboard = document.getElementById('adminDashboard');
-  
+
   if (adminLoginView) adminLoginView.style.display = 'block';
   if (adminDashboard) adminDashboard.classList.remove('visible');
-  
+
   // Go to home section (ZEST intro)
   navLinks.forEach(l => l.classList.remove('active'));
   sections.forEach(sec => sec.classList.remove('active'));
@@ -168,7 +171,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('section');
 
 navLinks.forEach(link => {
-  link.addEventListener('click', function(e) {
+  link.addEventListener('click', function (e) {
     // If link goes to another page (e.g. nsec-sports.html), allow default navigation
     const href = this.getAttribute('href');
     if (href && href !== 'javascript:void(0)' && !this.getAttribute('data-section')) {
@@ -181,20 +184,20 @@ navLinks.forEach(link => {
       alert('Admin access required. Please login with admin credentials.');
       return;
     }
-    
+
     navLinks.forEach(l => l.classList.remove('active'));
     sections.forEach(sec => sec.classList.remove('active'));
-    
+
     this.classList.add('active');
-    
+
     const sectionId = this.getAttribute('data-section');
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
       targetSection.classList.add('active');
     }
-    
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    
+
     // Close mobile menu
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
@@ -209,12 +212,12 @@ navLinks.forEach(link => {
 function showYear(year) {
   document.querySelectorAll('.gallery-content').forEach(g => g.style.display = 'none');
   document.querySelectorAll('.year-btn').forEach(btn => btn.classList.remove('active-year'));
-  
+
   const gallery = document.getElementById('gallery' + year);
   if (gallery) {
     gallery.style.display = 'block';
   }
-  
+
   event.target.classList.add('active-year');
 }
 
@@ -239,19 +242,19 @@ function loginStudent(event) {
   const id = document.getElementById('loginId').value;
   const password = document.getElementById('loginPassword').value;
   const msgDiv = document.getElementById('loginMsg');
-  
+
   // Check if this is an admin credential
   if (adminCredentials[id]) {
     if (adminCredentials[id] === password) {
       msgDiv.className = 'message success';
       msgDiv.innerHTML = ' Admin credentials detected! Redirecting to admin panel...';
-      
+
       // Store admin session
       sessionStorage.setItem('adminLoggedIn', 'true');
       sessionStorage.setItem('adminUsername', id);
       isAdminLoggedIn = true;
       adminUsername = id;
-      
+
       setTimeout(() => {
         showAdminAccess(id);
         // Switch to admin panel
@@ -268,28 +271,28 @@ function loginStudent(event) {
     }
     return false;
   }
-  
+
   // Regular student login
   if (id.length < 6) {
     msgDiv.className = 'message error';
     msgDiv.innerHTML = ' Invalid ID. Please enter a valid ZEST ID or College ID.';
     return false;
   }
-  
+
   if (password.length < 6) {
     msgDiv.className = 'message error';
     msgDiv.innerHTML = ' Password must be at least 6 characters long.';
     return false;
   }
-  
+
   msgDiv.className = 'message success';
   msgDiv.innerHTML = ` Login successful! Welcome back, ${id}.<br>Loading your ZEST dashboard...`;
-  
+
   setTimeout(() => {
     event.target.reset();
     msgDiv.innerHTML = '';
   }, 3000);
-  
+
   return false;
 }
 
@@ -341,6 +344,7 @@ function submitStudentPortal(event) {
   const department = document.getElementById('department').value;
   const year = document.getElementById('year').value;
 
+  // Basic validation
   if (!fullName) {
     msgDiv.className = 'message error';
     msgDiv.innerHTML = ' Please enter your full name.';
@@ -354,37 +358,105 @@ function submitStudentPortal(event) {
   }
 
   const checkedSports = Array.from(document.querySelectorAll('input[name="sport"]:checked')).map(cb => cb.value);
+
   if (checkedSports.length === 0) {
     msgDiv.className = 'message error';
     msgDiv.innerHTML = ' Please select at least one sport.';
     return false;
   }
 
-  const hasDoubles = checkedSports.some(s => s.indexOf('Doubles') !== -1);
-  const doublesSports = checkedSports.filter(s => s.indexOf('Doubles') !== -1);
+  // DOUBLES LOGIC
+
+  const hasDoubles = checkedSports.some(s => s.includes('Doubles'));
+  const doublesSports = checkedSports.filter(s => s.includes('Doubles'));
   let partnerDetailsList = [];
 
   if (hasDoubles) {
     const nameInputs = document.querySelectorAll('.partner-name-input');
     const phoneInputs = document.querySelectorAll('.partner-phone-input');
+
     for (let i = 0; i < doublesSports.length; i++) {
       const sport = doublesSports[i];
+
       const nameInput = Array.from(nameInputs).find(el => el.getAttribute('data-sport') === sport);
       const phoneInput = Array.from(phoneInputs).find(el => el.getAttribute('data-sport') === sport);
+
       const partnerName = nameInput ? nameInput.value.trim() : '';
       const partnerPhone = phoneInput ? phoneInput.value.trim() : '';
+
       if (!partnerName || !partnerPhone) {
         msgDiv.className = 'message error';
-        msgDiv.innerHTML = ' Please fill in partner name and phone for: ' + sport + '.';
+        msgDiv.innerHTML = ' Please fill in partner details for: ' + sport;
         return false;
       }
+
       if (partnerPhone.length !== 10) {
         msgDiv.className = 'message error';
-        msgDiv.innerHTML = ' Please enter a valid 10-digit partner phone for: ' + sport + '.';
+        msgDiv.innerHTML = ' Invalid partner phone for: ' + sport;
         return false;
       }
+
       partnerDetailsList.push({ sport, partnerName, partnerPhone });
     }
+  }
+
+  // TEAM EVENTS LOGIC
+
+  const TEAM_RULES = {
+    "Football - Mens": { min: 6, max: 8 },
+    "Volleyball - Mens": { min: 6, max: 8 },
+    "Handball - Mens": { min: 4, max: 6 },
+    "Handball - Womens": { min: 5, max: 7 }
+  };
+
+  let teamNamesList = [];
+  const teamInputs = document.querySelectorAll('.team-input');
+
+  if (teamInputs.length) {
+    for (let input of teamInputs) {
+
+      const sport = input.getAttribute('data-sport');
+
+      // ❗ only validate if that sport is still selected
+      if (!checkedSports.includes(sport)) continue;
+
+      const value = input.value.trim();
+
+      if (!value) {
+        msgDiv.className = 'message error';
+        msgDiv.innerHTML = ` Please enter team members for: ${sport}`;
+        return false;
+      }
+
+      const names = value.split(',').map(n => n.trim()).filter(n => n);
+      const rule = TEAM_RULES[sport];
+
+      if (rule && (names.length < rule.min || names.length > rule.max)) {
+        msgDiv.className = 'message error';
+        msgDiv.innerHTML =
+          ` ${sport} requires ${rule.min}-${rule.max} members. You entered ${names.length}.`;
+        return false;
+      }
+
+      // Format: "Football - Mens: A, B, C"
+      teamNamesList.push(names.join(', '));
+    }
+  }
+
+  // PAYLOAD BUILDING
+
+  let allPartnerNames = [];
+  let allPartnerPhones = [];
+
+  // Doubles
+  if (partnerDetailsList.length) {
+    allPartnerNames.push(...partnerDetailsList.map(p => p.partnerName));
+    allPartnerPhones.push(...partnerDetailsList.map(p => p.partnerPhone));
+  }
+
+  // Team events
+  if (teamNamesList.length) {
+    allPartnerNames.push(...teamNamesList);
   }
 
   const payload = {
@@ -394,21 +466,24 @@ function submitStudentPortal(event) {
     year,
     sports: checkedSports.join(', ')
   };
-  if (hasDoubles) {
-    // Your Google Apps Script (doPost) and spreadsheet columns expect:
-    // partnerName (Column G), partnerDepartment (Column H), partnerPhone (Column I).
-    // Frontend collects partnerName + partnerPhone per doubles sport, so we
-    // aggregate them into single string values for those 3 columns.
-    payload.partnerDepartment = department; // partner department is not separately collected in the form
-    payload.partnerName = partnerDetailsList.map(p => p.partnerName).join(', ');
-    payload.partnerPhone = partnerDetailsList.map(p => p.partnerPhone).join(', ');
 
-    // Keep detailed info as well (useful for debugging / future enhancements).
+  if (allPartnerNames.length) {
+    payload.partnerName = allPartnerNames.join(' | ');
+    payload.partnerDepartment = department;
+    payload.partnerPhone = allPartnerPhones.join(', ');
+  }
+
+  if (partnerDetailsList.length) {
     payload.partnerDetails = JSON.stringify(partnerDetailsList);
   }
 
+  // API CALL
+
   if (typeof GOOGLE_SCRIPT_URL === 'string' && GOOGLE_SCRIPT_URL.startsWith('http')) {
     try {
+      console.log("Sending payload:", payload);
+
+
       fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -422,17 +497,70 @@ function submitStudentPortal(event) {
     console.warn('GOOGLE_SCRIPT_URL is not configured.');
   }
 
+  // =========================
+  // ✅ SUCCESS UI
+  // =========================
+
   msgDiv.className = 'message success';
-  msgDiv.innerHTML = ' Registration submitted successfully! Your details have been saved.';
+  msgDiv.innerHTML = ' Registration submitted successfully!';
 
   setTimeout(() => {
     event.target.reset();
     document.getElementById('partnerSection').style.display = 'none';
+    document.getElementById('teamSection').style.display = 'none';
     msgDiv.innerHTML = '';
     initPartnerSectionToggle();
+    initTeamSectionToggle();
   }, 4000);
 
   return false;
+}
+
+
+function initTeamSectionToggle() {
+  const teamSection = document.getElementById('teamSection');
+  const teamFieldsContainer = document.getElementById('teamFieldsContainer');
+  const allSports = document.querySelectorAll('input[name="sport"]');
+
+  if (!teamSection || !teamFieldsContainer) return;
+
+  const TEAM_RULES = {
+    "Football - Mens": { min: 6, max: 8 },
+    "Volleyball - Mens": { min: 6, max: 8 },
+    "Handball - Mens": { min: 4, max: 6 },
+    "Handball - Womens": { min: 5, max: 7 }
+  };
+
+  function updateTeamSection() {
+    const checked = Array.from(allSports).filter(cb => cb.checked);
+    const teamSports = checked.filter(cb => TEAM_RULES[cb.value]);
+
+    teamSection.style.display = teamSports.length ? 'block' : 'none';
+    teamFieldsContainer.innerHTML = '';
+
+    teamSports.forEach(cb => {
+      const sport = cb.value;
+      const rule = TEAM_RULES[sport];
+
+      const block = document.createElement('div');
+      block.className = 'form-group';
+      block.setAttribute('data-sport', sport);
+
+      block.innerHTML =
+        `<label style="font-weight:600;">${escapeHtml(sport)} 
+        (Min ${rule.min}, Max ${rule.max})</label>
+        <input type="text" 
+          class="team-input" 
+          data-sport="${escapeHtml(sport)}"
+          placeholder="Enter names separated by commas"
+          style="width:100%; padding:8px; margin-top:6px;">`;
+
+      teamFieldsContainer.appendChild(block);
+    });
+  }
+
+  allSports.forEach(cb => cb.addEventListener('change', updateTeamSection));
+  updateTeamSection();
 }
 
 // Handle window resize
