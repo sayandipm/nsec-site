@@ -1307,7 +1307,7 @@ button[type="submit"]:active {
 /* ZEST: single background image across all areas (desktop + mobile) */
 .zest-page {
   background-color: #06080f !important;
-  background-image: url("assets/zest-background.png") !important;
+  background-image: url("/assets/zest-background.png") !important;
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-position: center center !important;
