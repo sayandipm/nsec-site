@@ -436,27 +436,14 @@ function submitStudentPortal(event) {
         return false;
       }
 
-      // Format: "Football - Mens: A, B, C"
-      teamNamesList.push(names.join(', '));
+      teamNamesList.push({
+        sport,
+        names: names.join(', ')
+      });
     }
   }
 
-  // PAYLOAD BUILDING
-
-  let allPartnerNames = [];
-  let allPartnerPhones = [];
-
-  // Doubles
-  if (partnerDetailsList.length) {
-    allPartnerNames.push(...partnerDetailsList.map(p => p.partnerName));
-    allPartnerPhones.push(...partnerDetailsList.map(p => p.partnerPhone));
-  }
-
-  // Team events
-  if (teamNamesList.length) {
-    allPartnerNames.push(...teamNamesList);
-  }
-
+  
   const payload = {
     fullName,
     phone,
@@ -465,14 +452,15 @@ function submitStudentPortal(event) {
     sports: checkedSports.join(', ')
   };
 
-  if (allPartnerNames.length) {
-    payload.partnerName = allPartnerNames.join(' | ');
-    payload.partnerDepartment = department;
-    payload.partnerPhone = allPartnerPhones.join(', ');
-  }
-
+  // Doubles only
   if (partnerDetailsList.length) {
     payload.partnerDetails = JSON.stringify(partnerDetailsList);
+  }
+
+  // Team only
+  if (teamNamesList.length) {
+    payload.teamDetails = JSON.stringify(teamNamesList);
+    payload.partnerDepartment = department;
   }
 
   // API CALL
