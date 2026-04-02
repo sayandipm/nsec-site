@@ -1,0 +1,1287 @@
+/* NSEC Sports page – logo, gradients aligned with NSEC Sports branding */
+
+body.nsec-page {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 30%, #3949ab 60%, #e53935 85%, #c62828 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* NSEC Home layout: wider content area like ZEST */
+.nsec-page .nsec-home-section {
+  padding: 80px 36px;
+}
+
+.nsec-home-card {
+  max-width: 1400px;
+}
+
+/* Top home countdown strip */
+.nsec-countdown-strip {
+  --unit-width: 88px;
+  --sep-width: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 14px;
+  background: linear-gradient(145deg, rgba(16, 34, 88, 0.72), rgba(35, 11, 76, 0.62));
+  backdrop-filter: blur(3px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  width: min(760px, calc(100% - 20px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nsec-countdown-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 55%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+
+.nsec-countdown-strip::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -50px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.22) 0%, rgba(255, 215, 0, 0) 70%);
+  pointer-events: none;
+}
+
+.nsec-countdown-title {
+  margin: 0 0 10px 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffd54f;
+  text-align: center;
+}
+
+.nsec-countdown-live-message {
+  display: none;
+  margin: 4px 0 2px;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5.4vw, 3.2rem);
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  color: transparent;
+  background: linear-gradient(150deg, #ffffff 5%, #ffe082 34%, #ffca28 56%, #ff8f00 98%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    0 0 1px rgba(255, 255, 255, 0.55),
+    0 4px 16px rgba(0, 0, 0, 0.42),
+    0 0 30px rgba(255, 193, 7, 0.44);
+  animation: nsecLivePulse 1.6s ease-in-out infinite;
+}
+
+@keyframes nsecLivePulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.35));
+  }
+  50% {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 20px rgba(255, 193, 7, 0.52));
+  }
+}
+
+.nsec-countdown-timer {
+  display: grid;
+  grid-template-columns: var(--unit-width) var(--sep-width) var(--unit-width) var(--sep-width) var(--unit-width) var(--sep-width) var(--unit-width);
+  align-items: center;
+  justify-content: center;
+  column-gap: 0;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.nsec-time-unit {
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.35rem);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: transparent;
+  background: linear-gradient(160deg, #ffffff 0%, #e8f3ff 32%, #ffd54f 65%, #ffb300 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 14px rgba(255, 215, 79, 0.34), 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.nsec-time-sep {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  font-family: 'Bebas Neue', 'Oswald', sans-serif;
+  font-size: clamp(1.9rem, 5.5vw, 3rem);
+  line-height: 1;
+  color: #ffd54f;
+  text-shadow: 0 0 12px rgba(255, 213, 79, 0.55), 0 0 28px rgba(255, 179, 0, 0.35);
+  animation: nsecBlinkColon 1s steps(1, end) infinite;
+}
+
+.nsec-countdown-labels {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: var(--unit-width) var(--sep-width) var(--unit-width) var(--sep-width) var(--unit-width) var(--sep-width) var(--unit-width);
+  width: calc((var(--unit-width) * 4) + (var(--sep-width) * 3));
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  column-gap: 0;
+}
+
+.nsec-countdown-labels span {
+  text-align: center;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.84);
+  font-weight: 700;
+}
+
+.nsec-countdown-labels span:nth-child(1) { grid-column: 1; }
+.nsec-countdown-labels span:nth-child(2) { grid-column: 3; }
+.nsec-countdown-labels span:nth-child(3) { grid-column: 5; }
+.nsec-countdown-labels span:nth-child(4) { grid-column: 7; }
+
+@keyframes nsecBlinkColon {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0.2;
+  }
+}
+
+@media (max-width: 680px) {
+  .nsec-countdown-strip {
+    --unit-width: 64px;
+    --sep-width: 14px;
+  }
+
+  .nsec-countdown-timer {
+    padding: 8px 8px;
+  }
+
+  .nsec-countdown-labels { }
+}
+
+/* NSEC home hero: no green/cyan accent lines on this card */
+.nsec-home-card .welcome-banner {
+  border-left: none;
+}
+
+/* Hero: main title, then official line directly underneath */
+.nsec-hero-heading-block {
+  margin-bottom: 18px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* Hero H1-line title: must be largest on the page; beats .card h2 (36px) and tagline */
+.nsec-page .nsec-home-card .welcome-banner .nsec-hero-heading-block h2 {
+  margin-bottom: 10px;
+  padding-bottom: 0;
+  border-bottom: none;
+  font-size: clamp(2.5rem, 5.5vw, 3.65rem);
+  line-height: 1.12;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 768px) {
+  .nsec-page .nsec-home-card .welcome-banner .nsec-hero-heading-block h2 {
+    font-size: clamp(1.9rem, 7.2vw, 2.65rem);
+    letter-spacing: 0.08em;
+  }
+}
+
+/* Official line — must beat .card p / .welcome-banner p from style.css */
+.nsec-page .nsec-home-card .welcome-banner p.nsec-hero-official {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: rgba(255, 215, 0, 0.95);
+  margin: 0;
+  margin-bottom: 0;
+  line-height: 1.45;
+  max-width: 52rem;
+}
+
+@media (min-width: 768px) {
+  .nsec-page .nsec-home-card .welcome-banner p.nsec-hero-official {
+    font-size: 18px;
+  }
+}
+
+/* Tagline + supporting copy — larger, glossy, aligned */
+.nsec-hero-message {
+  margin-top: 12px;
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 0;
+  max-width: 52rem;
+  text-align: left;
+  text-wrap: balance;
+}
+
+/* Tagline: high specificity beats style.css .card p and .welcome-banner p */
+.nsec-page .nsec-home-card .welcome-banner .nsec-hero-message p.nsec-hero-tagline {
+  font-family: 'Oswald', sans-serif;
+  /* Second largest: clearly below hero h2 at every breakpoint */
+  font-size: clamp(1.45rem, 2.65vw, 2.05rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  margin: 0 0 18px 0;
+  margin-bottom: 18px;
+  line-height: 1.28;
+  color: transparent;
+  background: linear-gradient(
+    165deg,
+    #ffffff 0%,
+    #fff8e1 20%,
+    #ffe082 42%,
+    #ffc107 62%,
+    #ff8f00 95%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.35))
+    drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35))
+    drop-shadow(0 0 22px rgba(255, 193, 7, 0.45));
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .nsec-page .nsec-home-card .welcome-banner .nsec-hero-message p.nsec-hero-tagline {
+    color: #ffd54f;
+    -webkit-text-fill-color: unset;
+    background: none;
+    filter: none;
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.85),
+      0 2px 8px rgba(0, 0, 0, 0.35),
+      0 0 28px rgba(255, 193, 7, 0.5);
+  }
+}
+
+.nsec-page .nsec-home-card .welcome-banner .nsec-hero-message p.nsec-hero-lede {
+  font-size: clamp(1.25rem, 1.9vw, 1.55rem);
+  line-height: 1.68;
+  margin: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  color: transparent;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f9ff 38%, #cfd8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 1px 0 rgba(255, 255, 255, 0.22))
+    drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4))
+    drop-shadow(0 0 18px rgba(120, 200, 255, 0.25));
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .nsec-page .nsec-home-card .welcome-banner .nsec-hero-message p.nsec-hero-lede {
+    color: rgba(255, 255, 255, 0.97);
+    -webkit-text-fill-color: unset;
+    background: none;
+    filter: none;
+    text-shadow:
+      0 0 1px rgba(255, 255, 255, 0.5),
+      0 2px 6px rgba(0, 0, 0, 0.35);
+  }
+}
+
+@media (max-width: 768px) {
+  .nsec-page .nsec-home-card .welcome-banner .nsec-hero-message p.nsec-hero-tagline {
+    font-size: clamp(1.3rem, 5vw, 1.75rem);
+  }
+
+  .nsec-page .nsec-home-card .welcome-banner .nsec-hero-message p.nsec-hero-lede {
+    font-size: clamp(1.12rem, 4.2vw, 1.35rem);
+    line-height: 1.65;
+  }
+}
+
+/* Mission & Vision — two balanced columns on wide screens */
+.nsec-mission-vision {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.nsec-mission-vision-block {
+  padding: 22px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.nsec-mission-vision-block h3 {
+  margin: 0 0 12px 0;
+  color: #ffd700;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nsec-mission-vision-block p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.65;
+  font-size: 16px;
+}
+
+/* Why Join Us */
+.nsec-why-join {
+  margin-top: 28px;
+  padding: 22px 24px;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 255, 204, 0.28);
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 4px solid #00ffcc;
+}
+
+.nsec-why-join h3 {
+  margin: 0 0 16px 0;
+  color: #ffd700;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.nsec-why-join-list {
+  margin: 0;
+  padding: 0 0 0 1.35rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+.nsec-why-join-list li {
+  margin-bottom: 8px;
+  padding-left: 6px;
+}
+
+.nsec-why-join-list li:last-child {
+  margin-bottom: 0;
+}
+
+.nsec-why-join-list li::marker {
+  color: #00ffcc;
+}
+
+@media (max-width: 900px) {
+  .nsec-mission-vision {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Intro pills */
+.nsec-intro-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.nsec-pill {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Calendar – make it more premium on NSEC home */
+.nsec-page .nsec-home-card .schedule-box {
+  border-left: none;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+.nsec-page .nsec-home-card .schedule-box h3 {
+  color: #ffd700;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.nsec-page .nsec-home-card .schedule-time {
+  color: rgba(255, 215, 0, 0.95);
+}
+
+.nsec-page .nsec-home-card .schedule-event {
+  font-weight: 700;
+}
+
+/* Yearly calendar flip cards */
+.nsec-page .nsec-home-card .nsec-schedule-flip {
+  border-left: none !important;
+  background: transparent !important;
+  padding: 0;
+  width: 100%;
+  perspective: 900px;
+}
+
+.nsec-page .nsec-home-card .nsec-schedule-inner {
+  position: relative;
+  width: 100%;
+  padding: 18px 34px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform-style: preserve-3d;
+  min-height: 64px;
+  transform-origin: center center;
+  transform: rotateX(0deg);
+  transition: transform 0.55s ease, box-shadow 0.5s ease, border-color 0.4s ease;
+}
+
+.nsec-page .nsec-home-card .nsec-schedule-front,
+.nsec-page .nsec-home-card .nsec-schedule-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 34px;
+  backface-visibility: hidden;
+}
+
+.nsec-page .nsec-home-card .nsec-schedule-back {
+  transform: rotateX(180deg);
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nsec-page .nsec-home-card .nsec-schedule-flip:hover .nsec-schedule-inner {
+  transform: rotateX(180deg);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+  border-color: rgba(255, 215, 0, 0.8);
+}
+
+.nsec-page .nsec-home-card .nsec-schedule-back .schedule-tag {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffd700;
+}
+
+.nsec-page .nsec-home-card .nsec-schedule-back .schedule-note {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 640px) {
+  .nsec-page .nsec-home-card .nsec-schedule-front,
+  .nsec-page .nsec-home-card .nsec-schedule-back {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .nsec-page .nsec-home-card .nsec-schedule-inner {
+    padding: 14px 16px;
+    min-height: 58px;
+  }
+
+  .nsec-page .nsec-home-card .nsec-schedule-front,
+  .nsec-page .nsec-home-card .nsec-schedule-back {
+    padding: 14px 16px;
+  }
+}
+
+/* Sports Committee section */
+.committee-section {
+  margin-top: 40px;
+}
+
+.committee-group {
+  margin-bottom: 42px;
+}
+
+.committee-group:last-child {
+  margin-bottom: 0;
+}
+
+.committee-group-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px 0;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.12), rgba(255, 215, 0, 0.08));
+  border: 1px solid rgba(0, 255, 255, 0.35);
+  border-radius: 12px;
+  color: #e0f7fa;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+}
+
+.committee-group-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.committee-group-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: #00ffff;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.5));
+}
+
+.committee-group-header--section {
+  width: 100%;
+  justify-content: center;
+  font-size: 1.25rem;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, rgba(229, 57, 53, 0.2), rgba(255, 215, 0, 0.12));
+  border-color: rgba(255, 215, 0, 0.4);
+  margin-bottom: 24px;
+}
+
+.committee-group-header--section + .committee-grid {
+  margin-top: 0;
+}
+
+.committee-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.committee-card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+  flex: 0 0 220px;
+  max-width: 260px;
+}
+
+.committee-card:hover {
+  transform: translateY(-12px) scale(1.06);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 35px rgba(167, 139, 250, 0.35), 0 0 55px rgba(251, 191, 36, 0.2);
+  border-color: rgba(167, 139, 250, 0.7);
+}
+
+/* Neon rectangle overlay on hover – gradient violet to amber */
+.committee-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.35s ease;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.08) 0%, rgba(251, 191, 36, 0.06) 100%);
+  box-shadow: 0 0 25px rgba(167, 139, 250, 0.3), inset 0 0 20px rgba(251, 191, 36, 0.08);
+}
+
+.committee-card:hover::before {
+  opacity: 1;
+  border-color: rgba(167, 139, 250, 0.6);
+  animation: neonRectPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes neonRectPulse {
+  0%, 100% { box-shadow: 0 0 25px rgba(167, 139, 250, 0.3), inset 0 0 20px rgba(251, 191, 36, 0.08); border-color: rgba(167, 139, 250, 0.6); }
+  50%      { box-shadow: 0 0 40px rgba(167, 139, 250, 0.5), 0 0 30px rgba(251, 191, 36, 0.2), inset 0 0 25px rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.7); }
+}
+
+/* Neon glow sweep: top to bottom on hover – gradient */
+.committee-card-inner {
+  position: relative;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.committee-card-inner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  height: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(167, 139, 250, 0.25) 0%,
+    rgba(192, 132, 252, 0.18) 35%,
+    rgba(251, 191, 36, 0.12) 65%,
+    transparent 100%
+  );
+  box-shadow: inset 0 0 40px rgba(167, 139, 250, 0.15);
+  transition: height 0.4s ease, opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.committee-card:hover .committee-card-inner::after {
+  animation: neonGlowSweep 0.5s ease forwards;
+}
+
+@keyframes neonGlowSweep {
+  0%   { height: 0; opacity: 1; }
+  100% { height: 100%; opacity: 1; }
+}
+
+.committee-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.committee-card:hover img {
+  transform: scale(1.12);
+}
+
+.committee-info {
+  position: relative;
+  z-index: 2;
+  padding: 14px 12px;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.85));
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background 0.35s ease;
+  text-align: center;
+}
+
+.committee-card:hover .committee-info {
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.92));
+}
+
+.committee-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.committee-card:hover .committee-position {
+  animation: thunderFlash 0.6s ease;
+}
+
+.committee-card:hover .committee-name,
+.committee-card:hover .committee-year,
+.committee-card:hover .committee-department {
+  animation: thunderFlash 0.6s ease 0.05s both;
+}
+
+@keyframes thunderFlash {
+  0%   { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.8); }
+  20%  { color: #c4b5fd; text-shadow: 0 0 18px rgba(167,139,250,0.9), 0 0 30px rgba(167,139,250,0.4); }
+  40%  { color: #fff; text-shadow: 0 0 20px rgba(255,255,255,0.95); }
+  60%  { color: #fcd34d; text-shadow: 0 0 16px rgba(251,191,36,0.85); }
+  80%  { color: #c4b5fd; text-shadow: 0 0 14px rgba(167,139,250,0.7); }
+  100% { color: #e9d5ff; text-shadow: 0 0 10px rgba(167,139,250,0.5); }
+}
+
+.committee-position {
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.committee-position .head-text {
+  color: #ffd700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6), 0 0 12px rgba(255, 215, 0, 0.4);
+  font-weight: 800;
+}
+
+.committee-year,
+.committee-department {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Sporty figures hidden – replaced by neon glow + thunder effect */
+.committee-card .sporty-figures {
+  display: none !important;
+}
+
+/* Core Members cards */
+.core-members-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.core-members-break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.core-member-card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 18px;
+  overflow: hidden;
+  background: radial-gradient(circle at top, rgba(59, 130, 246, 0.45), rgba(15, 23, 42, 0.95));
+  border: 2px solid rgba(148, 163, 184, 0.7);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+  flex: 0 0 240px;
+  max-width: 260px;
+}
+
+.core-member-card:hover {
+  transform: translateY(-14px) scale(1.06);
+  box-shadow:
+    0 22px 55px rgba(0, 0, 0, 0.7),
+    0 0 40px rgba(56, 189, 248, 0.6),
+    0 0 60px rgba(251, 191, 36, 0.35);
+  border-color: rgba(56, 189, 248, 0.9);
+}
+
+.core-member-card::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.14), rgba(251, 191, 36, 0.12));
+  box-shadow:
+    0 0 26px rgba(56, 189, 248, 0.5),
+    inset 0 0 24px rgba(251, 191, 36, 0.18);
+  transition: opacity 0.35s ease, border-color 0.35s ease;
+}
+
+.core-member-card:hover::before {
+  opacity: 1;
+  border-color: rgba(251, 191, 36, 0.9);
+}
+
+.core-member-card-inner {
+  position: relative;
+  overflow: hidden;
+}
+
+.core-member-card-inner::after {
+  content: '';
+  position: absolute;
+  left: -20%;
+  top: -40%;
+  width: 60%;
+  height: 0;
+  background: linear-gradient(
+    145deg,
+    rgba(56, 189, 248, 0.35),
+    rgba(59, 130, 246, 0.3),
+    rgba(251, 191, 36, 0.28)
+  );
+  filter: blur(4px);
+  opacity: 0;
+  transform: rotate(8deg);
+  transition: opacity 0.3s ease, height 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.core-member-card:hover .core-member-card-inner::after {
+  height: 180%;
+  opacity: 1;
+}
+
+.core-member-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.core-member-card:hover img {
+  transform: scale(1.12);
+}
+
+.core-member-info {
+  position: relative;
+  z-index: 2;
+  padding: 14px 12px 16px;
+  background: linear-gradient(180deg, transparent, rgba(15, 23, 42, 0.96));
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.core-member-name {
+  font-weight: 800;
+  font-size: 15px;
+  color: #e5e7eb;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.core-member-role {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.core-member-year,
+.core-member-department {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.9);
+}
+
+.core-role-president {
+  color: #facc15;
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.9);
+}
+
+.core-role-vice-president {
+  color: #22c55e;
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.9);
+}
+
+.core-role-secretary {
+  color: #60a5fa;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.9);
+}
+
+.core-role-coordinator {
+  color: #fb923c;
+  text-shadow: 0 0 10px rgba(251, 146, 60, 0.9);
+}
+
+.core-role-joint-secretary {
+  color: #f97373;
+  text-shadow: 0 0 10px rgba(248, 113, 113, 0.9);
+}
+
+/* Responsive adjustments for NSEC home */
+@media (max-width: 1024px) {
+  .nsec-page .nsec-home-section {
+    padding: 60px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nsec-page .nsec-home-section {
+    padding: 40px 16px;
+  }
+
+  .nsec-page .nsec-home-section,
+  .nsec-page .nsec-sports-head-section,
+  .nsec-page .nsec-core-members-section {
+    background-attachment: scroll, scroll;
+    background-size: cover, 92% auto;
+  }
+}
+
+/* Logo + brand text in navbar — compact (beats .logo-container img from style.css) */
+.nsec-page header {
+  padding: 8px 28px;
+  align-items: center;
+}
+
+.nsec-page header .nsec-logo-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  min-width: 0;
+}
+
+.nsec-page header .nsec-logo-container > div {
+  min-width: 0;
+}
+
+.nsec-page header .nsec-logo-container img.nsec-nav-logo {
+  height: 38px;
+  width: auto;
+  max-width: 88px;
+  object-fit: contain;
+  margin-right: 0;
+  display: block;
+  flex-shrink: 0;
+}
+
+.nsec-page header .nsec-logo-container h1 {
+  margin: 0;
+  font-size: clamp(1rem, 1.85vw, 1.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.nsec-page header .nsec-logo-container .tagline {
+  font-size: 9px;
+  margin-top: 2px;
+  letter-spacing: 1.2px;
+  line-height: 1.2;
+}
+
+.nsec-page header nav {
+  gap: 8px;
+}
+
+.nsec-page header nav a.nav-link-nsec {
+  padding: 7px 12px;
+  font-size: 12px;
+}
+
+@media (max-width: 1024px) {
+  .nsec-page header {
+    padding: 8px 20px;
+  }
+
+  .nsec-page header .nsec-logo-container img.nsec-nav-logo {
+    height: 34px;
+    max-width: 78px;
+  }
+
+  .nsec-page header .nsec-logo-container h1 {
+    font-size: clamp(0.95rem, 2.4vw, 1.1rem);
+  }
+
+  .nsec-page header nav a.nav-link-nsec {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nsec-page header {
+    position: sticky;
+    min-height: 64px;
+    padding: 8px 14px;
+  }
+
+  .nsec-page header .nsec-logo-container {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    padding-right: 56px; /* keep center text clear of hamburger button */
+  }
+
+  .nsec-page header .nsec-logo-container > div {
+    position: absolute;
+    left: 50%;
+    top: 32px;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    white-space: nowrap;
+    z-index: 2;
+  }
+
+  .nsec-page header .nsec-logo-container img.nsec-nav-logo {
+    height: 32px;
+    max-width: 72px;
+  }
+
+  .nsec-page header .menu-toggle {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    margin: 0;
+  }
+
+  .nsec-page header .nsec-logo-container .tagline {
+    font-size: 8px;
+  }
+
+  /* Full-width stacked menu: keep type readable for touch */
+  .nsec-page header nav {
+    margin-top: 14px;
+  }
+
+  .nsec-page header nav a.nav-link-nsec {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nsec-page header .nsec-logo-container img.nsec-nav-logo {
+    height: 28px;
+    max-width: 64px;
+  }
+}
+
+/* Sports palette BG: Home, Heads & Mentors, Core Members (image scaled down so logo/graphic fits) */
+.nsec-page .nsec-home-section,
+.nsec-page .nsec-sports-head-section,
+.nsec-page .nsec-core-members-section {
+  background-color: #0f172a;
+  background-image: url("Sports BG Image/SPORTS WEBSITE COLOUR PALATTE.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.nsec-page .nsec-home-section .card {
+  background: rgba(0, 0, 0, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nsec-page .nsec-home-section .welcome-banner h2,
+.nsec-page .nsec-home-section .schedule-box h3,
+.nsec-page .nsec-home-section .committee-section h3 {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nsec-page .nsec-home-section .schedule-item {
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 4px solid #e53935;
+}
+
+/* Infinito section – sports-themed gradient (field/track energy) */
+.nsec-infinito-section {
+  background: linear-gradient(160deg, #1b5e20 0%, #2e7d32 25%, #43a047 50%, #ff9800 75%, #e65100 100%);
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.nsec-infinito-section .card {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nsec-infinito-section .card h2,
+.nsec-infinito-section .card h3 {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nsec-infinito-section .card p {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Gallery section – vibrant sports-themed gradient */
+.nsec-gallery-section {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 25%, #3949ab 50%, #e53935 75%, #c62828 100%);
+  background-attachment: fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.nsec-gallery-section .card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nsec-gallery-section .card h2 {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nsec-gallery-section .card p {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.nsec-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.nsec-gallery-item {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 3px solid rgba(255, 215, 0, 0.8);
+  background: rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+  aspect-ratio: 4 / 3;
+}
+
+.nsec-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.nsec-gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+@media (max-width: 1024px) {
+  .nsec-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .nsec-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sports Head Details section (background shared with .nsec-home-section rule above) */
+
+.nsec-sports-head-section .card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nsec-sports-head-section .card h2 {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nsec-sports-head-section .card p {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Core Members Details section (background shared with .nsec-home-section rule above) */
+
+.nsec-core-members-section .card {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nsec-core-members-section .card h2 {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nsec-core-members-section .card p {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Use the uploaded sports palette image as main section background (no gradients) */
+.nsec-gallery-section,
+.nsec-page .nsec-sports-head-section,
+.nsec-page .nsec-core-members-section {
+  background-color: #0f172a;
+  background-image: url("sports bg image/SPORTS WEBSITE COLOUR PALATTE.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .nsec-gallery-section,
+  .nsec-page .nsec-sports-head-section,
+  .nsec-page .nsec-core-members-section {
+    background-attachment: scroll;
+    background-size: cover;
+  }
+}
+
+/* Social media links hover effect */
+.social-media-section a.social-link {
+  transition: transform 0.3s ease;
+}
+
+.social-media-section a.social-link:hover {
+  transform: scale(1.15);
+}
+
+.social-media-section a.social-link svg {
+  transition: all 0.3s ease;
+}
+
+.social-media-section a.social-link:hover svg {
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.4));
+}
+
+/* When section is not active, hide but keep gradient for when switched */
+.nsec-page section:not(.active) {
+  display: none;
+}
+
+.nsec-page section.active {
+  display: block;
+}
+
+/* Letter-by-letter animation styles */
+#animated-header {
+  overflow: hidden;
+}
+
+#animated-header span,
+#animated-tagline span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: letterFadeIn 0.5s ease forwards;
+}
+
+@keyframes letterFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Space handling for animated text */
+#animated-header span.space,
+#animated-tagline span.space {
+  width: 0.3em;
+}
