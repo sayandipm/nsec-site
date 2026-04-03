@@ -404,7 +404,8 @@ function submitStudentPortal(event) {
     "Football - Mens": { min: 6, max: 8 },
     "Volleyball - Mens": { min: 6, max: 8 },
     "Handball - Mens": { min: 4, max: 6 },
-    "Handball - Womens": { min: 5, max: 7 }
+    "Handball - Womens": { min: 5, max: 7 },
+    "Tug of War - Mens": { min: 6, max: 9 }
   };
 
   let teamNamesList = [];
@@ -514,7 +515,8 @@ function initTeamSectionToggle() {
     "Football - Mens": { min: 6, max: 8 },
     "Volleyball - Mens": { min: 6, max: 8 },
     "Handball - Mens": { min: 4, max: 6 },
-    "Handball - Womens": { min: 5, max: 7 }
+    "Handball - Womens": { min: 5, max: 7 },
+    "Tug of War - Mens": { min: 6, max: 9 }
   };
 
   function updateTeamSection() {
