@@ -703,8 +703,7 @@ button[type="submit"]:active {
 /* Points Table Container */
 .table-container {
   width: 100%;
-  /* overflow-x: auto; */
-  overflow-x: hidden;
+  overflow-x: auto;
   margin-top: 25px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
